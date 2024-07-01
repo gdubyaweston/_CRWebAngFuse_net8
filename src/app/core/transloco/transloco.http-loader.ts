@@ -5,8 +5,15 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class TranslocoHttpLoader implements TranslocoLoader
-{
-    private _httpClient = inject(HttpClient);
+{    
+
+    /**
+     * Constructor
+     */
+    constructor(
+        private _httpClient: HttpClient)
+    {
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Public methods

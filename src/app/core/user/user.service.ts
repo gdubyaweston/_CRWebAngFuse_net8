@@ -6,8 +6,14 @@ import { map, Observable, ReplaySubject, tap } from 'rxjs';
 @Injectable({providedIn: 'root'})
 export class UserService
 {
-    private _httpClient = inject(HttpClient);
     private _user: ReplaySubject<User> = new ReplaySubject<User>(1);
+
+    /**
+     * Constructor
+     */
+    constructor(private _httpClient: HttpClient)
+    {
+    }
 
     // -----------------------------------------------------------------------------------------------------
     // @ Accessors
