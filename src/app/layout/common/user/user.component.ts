@@ -103,4 +103,8 @@ export class UserComponent implements OnInit, OnDestroy
     {
         this._router.navigate(['/sign-out']);
     }
+
+    showUserInfo(): void {
+        alert('hello there, maybe change this....');
+    }
 }
