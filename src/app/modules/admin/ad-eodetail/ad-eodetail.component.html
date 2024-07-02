@@ -1,0 +1,101 @@
+<div style="padding: 10px; min-width: 1600px;">
+    <div>
+        <div style="float: left;">Escrow Order ID: {{ escrowOrderID }}</div>
+        <div style="float: right;">
+            <button mat-button style="padding-right: 20px;" [matMenuTriggerFor]="menu">Options</button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="openCreateDemoOrder();">Create Demo Order</button>
+                <button mat-menu-item (click)="openCreateLinkedOrder();">Create Linked Order</button>
+                <button mat-menu-item (click)="openSearchAddToClosing();">Search/Add To Closing</button>
+                <button mat-menu-item (click)="openUpdateClosingDescription();">Update Closing Description</button>
+                <button mat-menu-item (click)="openSendEmailEscrowDetail();">Send Email Escrow Detail</button>
+                <button mat-menu-item (click)="openTitleSearch();">Title Search</button>
+                <button mat-menu-item (click)="openTSAR();">TSAR</button>
+                <span>-------- Admin Tools --------</span>
+                <button mat-menu-item (click)="openViewLatestFXAgreement();">View Latest FX Agreement</button>
+            </mat-menu>
+            <button mat-button style="padding-right: 20px;" (click)="openAddParticipant();">Add Participant</button>
+            <button mat-button style="padding-right: 20px;" (click)="openWireInformation();">Wire Information</button>
+            <button mat-button style="padding-right: 20px;" (click)="openFunds();">Funds</button>
+            <button mat-button style="padding-right: 20px;" (click)="openLinkedOrders();" *ngIf="escrowDetails.hasLinkedOrder">Linked Orders</button>
+            <button mat-button (click)="openNewDigitalSignature();">New Digital Signature</button>        
+        </div>
+    </div>
+    <br><br>
+    <div *ngIf="isAgent || isDeveloper" style="text-align: right;">
+        <button class="detailsbadge" style="background-color: #0c7bed; width: 230px;">Purchase Price</button>
+        &nbsp;
+        <button class="detailsbadge" style="background-color: #339537; width: 170px;">Closing Date</button>
+    </div>
+    <div style="text-align: center; font-size: 24px; font-weight: bold; padding: 2px;">Virtual Closing</div>
+    <div style="text-align: center; font-size: 18px; font-weight: bold; padding: 2px;">{{ escrowTitle }}</div>
+    <div id="crst001" style="text-align: center; font-size: 16px; font-weight: bold; padding: 2px; display: block; cursor: pointer; align-items: center;" 
+        title="Click Here To View/Hide" (click)="toggleClosingItems();" [innerHtml]="closingItemsText"></div>
+    <div id="closingRoomData" style="font-size: 16px; text-align: center;" *ngIf="showItems">
+        <div *ngFor="let item of itemsOrderBy">
+            {{ item.itemDisplay }}
+        </div>
+    </div>
+    <div style="text-align: center; font-size: 16px; font-weight: bold;">Order Status: {{ escrowDetails.orderStatus }}</div>
+    <div class="grid-container" style="padding: 2px;">
+        <div class="grid-child" style="font-size: 18px;">Participants ({{ escrowDetails.participants.length }})</div>
+        <div class="grid-child" style="text-align: right; font-size: 12px;">
+            <span style="background-color: green; color: green; width: 20px; height: 20px;">GG</span>&nbsp;Completed
+            &nbsp;
+            <span style="background-color: blue; color: blue; width: 20px; height: 20px;">BB</span>&nbsp;Pending
+        </div>
+    </div>
+    <div style="min-width: 1500px; max-height: 750px; height: 685px; padding: 2px; background-color: lightblue; overflow-y: scroll;">
+        <mat-card *ngFor="let p of escrowDetails.participants" style="width: 420px; height: 400px; float: left; margin: 6px; padding: 0;">
+            <mat-card-header class="{{ p.playerIsCompleted ? 'completedBackground' : 'pendingBackground' }}">
+                <mat-card-subtitle style="text-align: right;">
+                    <button style="background-color: transparent; border: none; color: white;" 
+                        title="View/Edit Customer Profile" 
+                        (click)="openViewEditCustomerProfile(p.customerID, p.participantID);"><i class="fa fa-user"></i></button>
+                    <span>&nbsp;</span>
+                    <button style="background-color: transparent; border: none; color: white;" title="Tools" [matMenuTriggerFor]="menu2"><i class="fa fa-wrench"></i></button>
+                    <mat-menu #menu2="matMenu">
+                        <button mat-menu-item (click)="openViewEditCustomerProfile(p.customerID, p.participantID);">View/Edit Customer Profile</button>
+                        <button mat-menu-item (click)="openCreateBOSPDF();">Create BoS PDF</button>
+                        <button mat-menu-item (click)="openCreateARAPDF();">Create ARA PDF</button>
+                        <button mat-menu-item (click)="openCreatePOIPDF();">Create POI PDF</button>
+                        <button mat-menu-item (click)="openEditPOI();">Edit POI</button>
+                        <button mat-menu-item (click)="openRequestPhotoID();">Request Photo Id</button>
+                        <button mat-menu-item (click)="openSendEmail();">Send Email</button>
+                        <span>------ Admin Tools ------</span>
+                        <button mat-menu-item (click)="openViewLatestFXAgreement();">View Latest FX Agreement</button>
+                        <button mat-menu-item (click)="openSendFXAgreement();">Send FX Agreement</button>
+                        <button mat-menu-item (click)="openEditItems();">Edit Items</button>
+                        
+                    </mat-menu>
+                </mat-card-subtitle>
+                <mat-card-subtitle style="text-align: right; width: 350px; color: white;">{{ p.playerName }}</mat-card-subtitle>
+                <mat-card-title style="font-size: 18px;">
+                    <span *ngIf="p.playerTitle.length > 40" matTooltip = "{{p.playerTitle}}" matTooltipPosition = "left" matTooltipClass = "pdtooltip">
+                        {{ p.playerTitle.substring(0, 40)}}....          
+                      </span>
+                    <span *ngIf="p.playerTitle.length < 39">{{ p.playerTitle }}</span>
+                </mat-card-title>
+                <mat-card-subtitle style="color: white; font-size: 14px;">{{ p.playerDescription }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content></mat-card-content>
+            <mat-card-content style="padding: 2px; height: 240px; overflow-y: scroll;">
+                Some Content1<br>
+                Some Content2<br>
+                Some Content3<br>
+                Some Content4<br>
+                Some Content5<br>
+                Some Content6<br>
+                Some Content7<br>
+                Some Content8<br>
+                Some Content9<br>
+                Some Content10<br>
+                Some Content11<br>
+                Some Content12<br>
+                Some Content13<br>
+                Some Content14<br>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    
+</div>

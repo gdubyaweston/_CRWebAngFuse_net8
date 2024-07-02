@@ -1,0 +1,211 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Add New Participant
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 22px;">
+  <div style="padding-top: 10px; padding-bottom: 5px; font-size: 16px;" class="cellTitle">Profile Information:<br>
+    <span style="font-size: 12px;">(Search By Email, Last Name or Company Name)</span>
+  </div>
+  <div style="padding-top: 10px; ">
+    <table>
+      <tr>
+        <td class="cellTitle">Role:</td>
+      </tr>
+      <tr>
+        <td>
+          <select class="cellData cellDataO" [(ngModel)]="daParticipant.roleID" (change)="onRoleChange();">
+            <option *ngFor="let role of roles" [value]="role.roleId">{{ role.roleName }}</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">First Name:</td>
+        <td class="cellTitle">Middle Name:</td>
+        <td class="cellTitle">Last Name:</td>
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.firstName">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.middleName">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.lastName" (change)="onLastNameChanged()">
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">Title:</td>
+        <td class="cellTitle">Display Alias:</td>
+        <td class="cellTitle">Company:</td>
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.title">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.trackerDisplayAlias">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.company" (change)="onCompanyChanged()">
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">Email Address:</td>
+        <td class="cellTitle"></td>
+        <td class="cellTitle">Address:</td>
+        <td class="cellTitle"></td>
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.email" (change)="onEmailChanged()">
+        </td>
+        <td style="padding-right: 5px;">
+          <button (click)="onClickShowEmail();" style="width: 80px; background-color: black; color: white;">...</button>
+          <!-- <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.email2"> -->
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.address">
+          <!-- <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.email3"> -->
+        </td>
+        <td style="padding-right: 5px;">
+          <button (click)="onClickShowAddress();" style="width: 80px; background-color: black; color: white;">...</button>
+          <!-- <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.email3"> -->
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">Country:</td>
+        <td class="cellTitle" *ngIf="this.isUS">Select A State:</td>
+        <td class="cellTitle" *ngIf="this.isCanada">Select A Province:</td>
+        <td class="cellTitle" *ngIf="this.isRegion">Region/Province/Territory:</td>        
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <select class="cellData cellDataO" [(ngModel)]="daParticipant.country" (change)="onCountryChange();" > 
+            <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
+          </select>
+        </td>
+        <td style="padding-right: 5px;" *ngIf="this.isUS">
+          <select class="cellData cellDataO" [(ngModel)]="daParticipant.state">
+            <option *ngFor="let uss of usstates" [value]="uss.id">{{ uss.name }}</option>
+          </select>
+        </td>
+        <td style="padding-right: 5px;" *ngIf="this.isCanada">
+          <select class="cellData cellDataO" [(ngModel)]="daParticipant.province">
+            <option *ngFor="let ccc of canadianstates" [value]="ccc.id">{{ ccc.name }}</option>
+          </select>
+        </td>
+        <td style="padding-right: 5px;" *ngIf="this.isRegion">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.region">
+        </td>        
+      </tr>
+      <tr>
+        <td class="cellTitle">City:</td>
+        <td class="cellTitle">Zip/Postal Code:</td>
+        <td class="cellTitle"></td>
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.city">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" [(ngModel)]="daParticipant.postal">
+        </td>
+        <td style="padding-right: 5px;">
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">Business Phone:</td>
+        <td class="cellTitle">Business Extension:</td>
+        <td class="cellTitle">Business Fax:</td>
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.businessPhone" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000" >
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.extension">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.businessFax" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+      </tr>
+      <tr>        
+        <td class="cellTitle">Business Phone 2:</td>
+        <td class="cellTitle">Business Extension 2:</td>
+      </tr>
+      <tr>        
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.businessPhone2" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.extension2">
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">Home Phone:</td>
+        <td class="cellTitle">Home Phone 2:</td>
+        <td class="cellTitle">Home Fax:</td>
+      </tr>
+      <tr>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.homePhone" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.homePhone2" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.homeFax" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+      </tr>
+      <tr>        
+        <td class="cellTitle">Cell Phone:</td>
+        <td class="cellTitle">Pager:</td>
+      </tr>
+      <tr>        
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.cellPhone" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+        <td style="padding-right: 5px;">
+          <input type="text" class="cellData cellDataO" 
+            [(ngModel)]="daParticipant.pager" 
+            mask="000-0000 || (000) 000-0000 || 0 (000) 000-0000">
+        </td>
+      </tr>
+      <tr>
+        <td class="cellTitle">Customer Notes:</td>
+      </tr>
+      <tr>
+        <td colspan="3">
+          <textarea matInput class="cellData cellDataO" style="width: 900px; height: 60px; border: 1px solid black;"
+                [(ngModel)]="daParticipant.customerNotes"></textarea>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div style="padding-left: 22px; padding-top: 10px;">
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px;"
+        (click)="saveParticipant();">Save Participant</button>
+</div>

@@ -1,0 +1,36 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">View / Edit Customer Emails
+      <button mat-button matDialogClose matTooltip="Close"
+        style="background-color: transparent; color: black; float: right; font-size: 24px;">
+        &nbsp;X&nbsp;
+      </button>
+    </h2>
+</div>
+<div style="padding-left: 22px;">
+    <div style="padding-top: 10px; ">
+      <table>        
+        <tr>
+          <td class="cellTitle">Email Address 2:</td>
+        </tr>
+        <tr>
+          <td style="padding-right: 5px;">
+            <input type="text" class="cellData cellDataO" [(ngModel)]="customerData.email2">
+          </td>
+        </tr>
+        <tr>
+            <td class="cellTitle">Email Address 3:</td>
+        </tr>
+        <tr>
+            <td style="padding-right: 5px;">
+              <input type="text" class="cellData cellDataO" [(ngModel)]="customerData.email3">
+            </td>
+        </tr>
+        
+      </table>    
+    </div>  
+  </div>
+  <div style="padding-left: 22px; padding-top: 10px;">
+    <!--
+    <button mat-button style="background-color: teal; color: white; margin-right: 4px;" (click)="saveEmails();"><i class="fa fa-save"></i> Save</button>
+  -->
+  </div>
