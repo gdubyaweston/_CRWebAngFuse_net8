@@ -32,6 +32,7 @@ export class FuturisticLayoutComponent implements OnInit, OnDestroy
     isScreenSmall: boolean;
     navigation: Navigation;
     user: User;
+    theCurrentDate: Date;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**
@@ -46,6 +47,7 @@ export class FuturisticLayoutComponent implements OnInit, OnDestroy
         private _fuseNavigationService: FuseNavigationService,
     )
     {
+        this.theCurrentDate = new Date();
     }
 
     // -----------------------------------------------------------------------------------------------------

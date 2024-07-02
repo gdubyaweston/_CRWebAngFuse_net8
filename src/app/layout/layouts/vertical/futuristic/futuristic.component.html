@@ -14,8 +14,9 @@
         <div class="flex items-center h-20 p-6 pb-0">
             <img
                 class="w-30"
-                src="assets/images/logo/logo-text-on-dark.svg">
+                src="assets/images/logo/AIClogo137.png">
         </div>
+        <div>&nbsp;</div>
     </ng-container>
     <!-- Navigation footer hook -->
     <ng-container fuseVerticalNavigationFooter>
@@ -23,11 +24,11 @@
         <div class="flex items-center w-full px-6 py-8 border-t">
             <user></user>
             <div class="flex flex-col w-full ml-4 overflow-hidden">
-                <div class="w-full whitespace-nowrap text-ellipsis overflow-hidden leading-normal text-current opacity-80">
-                    {{user.name}}
-                </div>
+                <!--<div class="w-full whitespace-nowrap text-ellipsis overflow-hidden leading-normal text-current opacity-80">
+                    {{ user.name }}
+                </div>-->
                 <div class="w-full mt-0.5 whitespace-nowrap text-sm text-ellipsis overflow-hidden leading-normal text-current opacity-50">
-                    brian.hughes&#64;company.com
+                    <a href="mailto:{{ user.email }}?subject=Email">{{ user.email }}</a>
                 </div>
             </div>
         </div>
@@ -46,7 +47,7 @@
             (click)="toggleNavigation('mainNavigation')">
             <mat-icon [svgIcon]="'heroicons_outline:bars-3'"></mat-icon>
         </button>
-        <!-- Components -->
+        <!-- Components 
         <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
             <languages></languages>
             <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
@@ -61,21 +62,33 @@
                 <mat-icon [svgIcon]="'heroicons_outline:chat-bubble-left-right'"></mat-icon>
             </button>
         </div>
+        -->
     </div>
 
     <!-- Content -->
-    <div class="flex flex-col flex-auto">
-        <!-- *ngIf="true" hack is required here for router-outlet to work correctly.
-             Otherwise, layout changes won't be registered and the view won't be updated! -->
+    <div style="padding-left: 2px;" class="flex flex-col flex-auto">
+        <!--{{ theCurrentDate }} From Futuristic Component user: User
+        <div *ngIf="user">
+            [ID: {{ user.id}}],
+            [Email: {{ user.email}}], 
+            [UserName: {{ user.userName}}], 
+            [VectorsUID: {{ user.vectorsUID}}]            
+        </div>-->
+        <router-outlet></router-outlet>
+        <!--             
+            *ngIf="true" hack is required here for router-outlet to work correctly.
+             Otherwise, layout changes won't be registered and the view won't be updated! 
         <router-outlet *ngIf="true"></router-outlet>
+    -->
     </div>
 
     <!-- Footer -->
     <div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
-        <span class="font-medium text-secondary">Fuse &copy; {{currentYear}}</span>
+        <span class="font-medium text-secondary">Copyright &copy; 2017 - {{currentYear}}</span>
     </div>
 
 </div>
 
-<!-- Quick chat -->
+<!-- Quick chat 
 <quick-chat #quickChat="quickChat"></quick-chat>
+-->
