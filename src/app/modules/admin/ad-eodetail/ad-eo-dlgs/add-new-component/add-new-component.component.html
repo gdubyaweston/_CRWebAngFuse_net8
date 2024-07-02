@@ -1,0 +1,32 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Add New {{ objectType }} for {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            (click)="closeDialog();"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 34px;">
+    <div *ngIf="objectType == 'Airframe'">
+        <label class="cellTitle">Enter N-Number:</label><br>
+        <input type="text" class="cellData cellDataO" id="inpANNNumber" style="width: 500px;" [(ngModel)]="nnumber"> 
+    </div>
+    <div>
+        <label class="cellTitle">Enter Serial Number:</label><br>
+        <input type="text" class="cellData cellDataO" id="inpANSerialNumber" style="width: 500px;" [(ngModel)]="serialNumber">
+    </div>
+    <div>
+        <label class="cellTitle">Enter Make:</label><br>
+        <input type="text" class="cellData cellDataO" id="inpANMake" style="width: 500px;" [(ngModel)]="make">
+    </div>
+    <div>
+        <label class="cellTitle">Enter Model:</label><br>
+        <input type="text" class="cellData cellDataO" id="inpANModel" style="width: 500px;" [(ngModel)]="model">
+    </div>
+    <div>&nbsp;</div>
+    
+</div>
+<div style="padding-left: 34px;">
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px; width: 150px;" (click)="saveComponent();">Save {{ objectType }}</button>
+</div>

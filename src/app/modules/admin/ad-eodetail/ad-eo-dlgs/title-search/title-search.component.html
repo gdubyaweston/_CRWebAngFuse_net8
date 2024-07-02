@@ -1,0 +1,52 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Create Title Search Request For {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 22px;">
+    <div *ngIf="showData">
+        <div style="font-weight: bold;">Title Search Requestor:</div>
+        <select style="width: 400px; padding: 3px; border: 1px solid black;" [(ngModel)]="selectedUser">
+            <option *ngFor="let da of availableList" [value]="da.id">{{ da.name }}</option>
+        </select>
+        <br><br>
+        <div *ngIf="hideAll_TS"></div>
+        <div *ngIf="!hideAll_TS">
+            <div *ngIf="hideEng_TS"></div>
+            <div *ngIf="!hideEng_TS">
+                <input type="checkbox" id="chkEngine" name="chkEngine" (change)="checkedEngine = !checkedEngine"><span
+                    style="font-weight: bold;"> Include Engine(s)</span>
+                <br>
+            </div>
+            <div *ngIf="hideProp_TS"></div>
+            <div *ngIf="!hideProp_TS">
+                <input type="checkbox" id="chkProp" name="chkProp" (change)="checkedProp = !checkedProp"><span
+                    style="font-weight: bold;"> Include Prop(s)</span>
+                <br>
+            </div>
+        </div>
+        <br>
+        <div *ngIf="hideAll_TSIR"></div>
+        <div *ngIf="!hideAll_TSIR">
+            <div style="font-weight: bold;">IR Priority Searches</div>
+            <div *ngIf="hideAF_TSIR"></div>
+            <div *ngIf="!hideAF_TSIR">
+                <input type="checkbox" id="chkPAirframe" name="chkPAirframe"
+                    (change)="checkedPAirframe = !checkedPAirframe"><span style="font-weight: bold;"> Airframe</span>
+                <br>
+            </div>
+            <div *ngIf="hideEng_TSIR"></div>
+            <div *ngIf="!hideEng_TSIR">
+                <input type="checkbox" id="chkPEngine" name="chkPEngine" (change)="checkedPEngine = !checkedPEngine"><span
+                    style="font-weight: bold;"> Engine(s)</span>
+                <br>
+            </div>
+        </div>
+        <br>
+        <button mat-button style="background-color: teal; color: white;" (click)="submitTitleSearch();">Submit Title Search</button>
+    </div>
+    <div *ngIf="!showData">Search Request Already Submitted</div>
+</div>

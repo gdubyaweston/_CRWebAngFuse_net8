@@ -1,0 +1,22 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Send Email Escrow Detail {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 22px;">
+    <div *ngIf="showData">
+        <div style="font-size: 16px; font-weight: bold;">Select user to start email process:</div>
+        <select style="font-size: 14px; width: 600px; height: 300px; padding: 6px; border: 1px solid black;" [(ngModel)]="selectedUser" multiple>
+            <option *ngFor="let da of availableList" [value]="da.id">{{ da.name }}</option>
+        </select>
+        <br><br>
+        <button mat-button style="background-color: teal; color: white;" (click)="sendEmail();" >Send Email</button>
+        <button mat-button style="background-color: red; margin-left: 10px;" (click)="selectedUser = ''">Clear Selection</button>
+    </div>
+    <div *ngIf="!showData">
+        <div>No users available to send email.</div>
+    </div>
+</div>

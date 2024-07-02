@@ -1,0 +1,35 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Create Title Search After Recording For {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 22px;">
+    <div>
+        <input type="checkbox" id="chkEscrow" name="chkEscrow" [(ngModel)]="checkedEscrow"><span
+            style="font-weight: bold;"> Paid with Escrow</span>
+        <br>
+        <input type="checkbox" id="chkIRSearch" name="chkIRSearch" [(ngModel)]="checkedIRSearch"><span
+            style="font-weight: bold;"> Request IR Searches</span>
+        <br>
+        <input type="checkbox" id="chkIncludeReg" name="chkIncludeReg" [(ngModel)]="checkedIncludeRegistration"><span
+            style="font-weight: bold;"> Include Registration</span>
+        <br>
+        <input type="checkbox" id="chkInclude337" name="chkInclude337" [(ngModel)]="checkedInclude337"><span
+            style="font-weight: bold;"> Include 337</span>
+        <br>
+    </div>
+    <br>
+    <div>
+        <div style="font-weight: bold;">Select TSAR Requestor:</div>
+        <select style="width: 400px; padding: 3px; border: 1px solid black;" [(ngModel)]="selectedUser">
+            <option *ngFor="let da of availableList" [value]="da.id">{{ da.name }}</option>
+        </select>
+    </div>
+    <br>
+    <div>
+        <button mat-button style="background-color: teal; color: white;" (click)="submitTSAR();">Submit TSAR</button>
+    </div>
+</div>

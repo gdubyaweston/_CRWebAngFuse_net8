@@ -1,0 +1,19 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Change Escrow Closing Description {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 22px; padding-right: 22px;">
+    <p><b>Current Description:</b></p>
+    <textarea class="cellDataO" style="height: 75px; width: 1150px;" [(ngModel)]="currentDescription" disabled></textarea>
+    <hr>
+    <p><b>Updated Description:</b></p>
+    <textarea class="cellDataO" style="height: 75px; width: 1150px;" [(ngModel)]="updatedDescription"></textarea>
+</div>
+<div style="padding-left: 22px; padding-top: 4px;">
+    <button mat-button style="background-color: teal; color: white; margin-right: 4px;"
+        (click)="updateCurrentDescription();">Submit Change</button>
+</div>

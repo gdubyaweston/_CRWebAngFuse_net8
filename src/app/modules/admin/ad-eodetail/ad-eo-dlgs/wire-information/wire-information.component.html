@@ -1,0 +1,111 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Wire Infomation
+      <button mat-button matDialogClose matTooltip="Close"
+        style="background-color: transparent; color: black; float: right; font-size: 24px;">
+        &nbsp;X&nbsp;
+      </button>
+    </h2>
+  </div>
+  <div>
+    <div style="padding: 14px">
+      <button mat-button style="background-color: teal; color: white; margin-right: 2px;"
+        (click)="openAddWireInfo()">
+        <span class="fa fa-plus"></span>&nbsp;Add Wire Information
+      </button>
+      <button mat-button style="background-color: teal; color: white; margin-right: 2px;" (click)="openPrintWireInfo()">
+        <span class="fa fa-print"></span>&nbsp;Print
+      </button>
+  
+    </div>
+    <mat-dialog-content>
+      <div style="padding: 14px">
+        <table mat-table [dataSource]="dataSource" style="width: 2000px;" matSort>
+          <ng-container matColumnDef="playerName">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+              mat-sort-header>
+              Name
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.playerName }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="playerFirstName">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+              mat-sort-header>
+              First Name
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.playerFirstName }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="cellPhone">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+              mat-sort-header>
+              Cell
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.cellPhone }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="accountName">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+              mat-sort-header>
+              Account Name
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.accountName }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="bankName">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+              Bank Name
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.bankName }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="createdDate">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+              Date Created
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.createdDate }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="verifiedByName">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+              Verified By
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.verifiedByName }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="verifiedDate">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+              Date Verified
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.verifiedDate }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="wireRequestID">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+              Request ID
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.wireRequestID }}
+            </td>
+          </ng-container>
+  
+          <!-- This is used to pad the table so keep it at the end -->
+          <ng-container matColumnDef="end">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 10px;"></th>
+            <td mat-cell *matCellDef="let element"></td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+  
+      <!-- <mat-checkbox (change)="checkboxChange($event)">Toggle <code>disableClose</code></mat-checkbox> -->
+    </mat-dialog-content>
+    <mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 15]"></mat-paginator>
+    
+  </div>

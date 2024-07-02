@@ -1,0 +1,117 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Search Add To Closing for {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+
+<div style="padding-left: 22px;">
+    <p style="color: red;">Only One(1) Airframe Allowed Per Escrow Order</p>
+    <table>
+        <thead>
+            <tr style="font-weight: bold; font-size: 16px;">
+                <td>Object Type</td>
+                <td><span *ngIf="showNNumber">N Number</span></td>
+                <td>Serial Number</td>
+                <td>Make</td>
+                <td>Model</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="font-size: 16px;">
+                <td>
+                    <select style="font-size: 16px; width: 250px; border: 1px solid black; background-color: lightgray;" [(ngModel)]="selectedObject" (change)="objectTypeChange();">
+                        <option *ngFor="let option of availableTypes" [value]="option.id">{{ option.name }}</option>
+                    </select>
+                </td>
+                <td><input style="font-size: 16px; width: 250px; border: 1px solid black; background-color: lightgray;" type="text" name="searchNNumber" id="searchNNumber" (change)="checkAllowAddNew();"
+                    [(ngModel)]="selectedNNumber" *ngIf="showNNumber"></td>
+                <td><input style="font-size: 16px; width: 300px; border: 1px solid black; background-color: lightgray;" type="text" name="searchSerialNumber" id="searchSerialNumber" (change)="checkAllowAddNew();"
+                    [(ngModel)]="selectedSerialNumber"></td>
+                <td><input style="font-size: 16px; width: 300px; border: 1px solid black; background-color: lightgray;" type="text" name="searchMake" id="searchMake" (change)="checkAllowAddNew();"
+                    [(ngModel)]="selectedMake"></td>
+                <td><input style="font-size: 16px; width: 300px; border: 1px solid black; background-color: lightgray;" type="text" name="searchModel" id="searchModel" (change)="checkAllowAddNew();"
+                    [(ngModel)]="selectedModel"></td>
+                <td><button mat-button style="background-color: teal; color: white; margin-right: 4px; font-size: 16px; width: 100px;" (click)="performReset();">Reset</button></td>
+            </tr>
+            <tr><td><input type="checkbox" [(ngModel)]="exactMatch" (change)="!exactMatch">&nbsp;Exact Match</td></tr>
+            <tr>
+                <td>
+                    <button mat-button style="background-color: teal; color: white; margin-right: 4px; font-size: 14px; width: 100px;" (click)="performSearch();" [disabled]="disableSearch">Search</button>&nbsp;
+                    <button mat-button style="background-color: teal; color: white; margin-right: 4px; font-size: 14px; width: 100px;" (click)="performAddNew();" [disabled]="disableAddNew">Add New</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div>
+        <table mat-table [dataSource]="dataSource" width="100%" matSort *ngIf="showResults">
+            <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;"></th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.canAdd">
+                        <button mat-button style="background-color: teal; color: white; width: 60px;" (click)="addItem(element);">Add</button>
+                    </span>
+                    <span *ngIf="!element.canAdd"></span>
+                </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="ir">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;">Qualifes
+                    For IR</th>
+                <td mat-cell *matCellDef="let element">
+                    <span *ngIf="element.qualifiesForIR">
+                        <i class='fas fa-check'></i>
+                    </span>
+                    <span *ngIf="!element.qualifiesForIR"></span>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="serialNumber">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;"
+                    mat-sort-header>Serial Number</th>
+                <td mat-cell *matCellDef="let element"> {{element.serialNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="make">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;"
+                    mat-sort-header>Make</th>
+                <td mat-cell *matCellDef="let element"> {{element.make}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="model">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;"
+                    mat-sort-header>Model</th>
+                <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nNumber">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;"
+                    mat-sort-header>N Number</th>
+                <td mat-cell *matCellDef="let element"> {{element.nNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="registrationCountry">
+                <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 80px;"
+                    mat-sort-header>Country</th>
+                <td mat-cell *matCellDef="let element"> {{element.registrationCountry}} </td>
+            </ng-container>
+
+
+            <tr mat-header-row *matHeaderRowDef="foundColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: foundColumns;"></tr>
+        </table>
+        <mat-paginator [length]="collectionSize" [pageSize]="5" [pageSizeOptions]="[5, 6, 8]"></mat-paginator>
+    </div>
+    
+</div>
+<div style="padding-left: 22px;">
+    <div *ngIf="assignedInventory.length > 0">
+        <span *ngFor="let option of assignedInventory">{{ option.name }}<br></span>
+    </div>
+    <div *ngIf="assignedInventory.length <= 0">Nothing Assigned</div>
+
+</div>
+

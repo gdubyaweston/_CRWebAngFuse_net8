@@ -1,0 +1,15 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">View Latest FX Agreement
+      <button mat-button matDialogClose matTooltip="Close"
+        style="background-color: transparent; color: black; float: right; font-size: 24px;">
+        &nbsp;X&nbsp;
+      </button>
+    </h2>
+</div>
+<div style="padding-left: 22px; text-align: center;">
+    <div [innerHTML]="agreementText" style="max-height: 600px; overflow-y: scroll; text-align: unset;"></div>
+</div>
+<div style="padding-left: 22px; padding-top: 4px; text-align: center;">
+    <div><i class="fa fa-square"></i> I AGREE to the {{ agreementType }} Agreement</div>
+    <button mat-button matDialogClose style="background-color: teal; color: white; margin-right: 4px;">Accept and Continue</button>
+</div>
