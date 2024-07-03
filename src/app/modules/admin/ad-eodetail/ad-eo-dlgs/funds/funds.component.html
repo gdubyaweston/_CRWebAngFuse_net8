@@ -1,0 +1,139 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Initial Funds Worksheet For {{ escrowOrderID }}
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding: 4px;">
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px;"
+        (click)="openAddReceivedFunds();">
+        <span class="fa fa-plus"></span>&nbsp;Add Received Funds
+    </button>
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px;"
+        (click)="openAddReleasedFunds();">
+        <span class="fa fa-plus"></span>&nbsp;Add Released Funds
+    </button>
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px;"
+        (click)="openCAStatements();">
+        Statements&nbsp;<span class="fa fa-arrow-right"></span>
+    </button>
+    <span style="font-weight: bold; font-size: 18px; padding-left: 150px;">Total Funds:&nbsp;{{ totalFunds | currency
+        }}</span>
+</div>
+<div>
+    <!--
+        TODO: Must ReImplement -->
+    <mat-accordion multi>
+        <mat-expansion-panel style="margin: 2px;">
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Received Funds</mat-panel-title>
+                <mat-panel-description>Total Received Funds:&nbsp;{{ totalReceived | currency }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <table mat-table [dataSource]="receivedDataSource" width="100%" #receivedSort="matSort" matSort>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+                        mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="middleName">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+                        mat-sort-header> Middle </th>
+                    <td mat-cell *matCellDef="let element">{{ element.middleName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 200px;"
+                        mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="company">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+                        mat-sort-header> Company </th>
+                    <td mat-cell *matCellDef="let element">{{ element.company }}</td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 500px;"
+                        mat-sort-header> Description </th>
+                    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+                </ng-container>
+                <ng-container matColumnDef="dateModified">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+                        mat-sort-header> Date </th>
+                    <td mat-cell *matCellDef="let element">{{ element.dateModified | date:'MM/dd/yyyy' }}</td>
+                </ng-container>
+                <ng-container matColumnDef="fundAmount">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+                        mat-sort-header> Amount </th>
+                    <td mat-cell *matCellDef="let element">{{ element.fundAmount | currency }}</td>
+                </ng-container>
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+                    </th>
+                    <td mat-cell *matCellDef="let element"><button mat-button
+                            (click)="openEditReceivedFunds(element.itemID);"
+                            style="color: blueviolet;">Edit</button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="receivedDisplayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: receivedDisplayedColumns;"></tr>
+            </table>
+            <mat-paginator #receivedPaginator [pageSize]="3" [pageSizeOptions]="[2, 3, 4, 6, 10]"></mat-paginator>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Released Funds</mat-panel-title>
+                <mat-panel-description>Total Released Funds:&nbsp;{{ totalReleased | currency }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <table mat-table [dataSource]="releasedDataSource" width="100%" #releasedSort="matSort" matSort>
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+                        mat-sort-header> First Name </th>
+                    <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="middleName">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+                        mat-sort-header> Middle </th>
+                    <td mat-cell *matCellDef="let element">{{ element.middleName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 200px;"
+                        mat-sort-header> Last Name </th>
+                    <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+                </ng-container>
+                <ng-container matColumnDef="company">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+                        mat-sort-header> Company </th>
+                    <td mat-cell *matCellDef="let element">{{ element.company }}</td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 500px;"
+                        mat-sort-header> Description </th>
+                    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+                </ng-container>
+                <ng-container matColumnDef="dateModified">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+                        mat-sort-header> Date </th>
+                    <td mat-cell *matCellDef="let element">{{ element.dateModified | date:'MM/dd/yyyy' }}</td>
+                </ng-container>
+                <ng-container matColumnDef="fundAmount">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"
+                        mat-sort-header> Amount </th>
+                    <td mat-cell *matCellDef="let element">{{ element.fundAmount | currency }}</td>
+                </ng-container>
+                <ng-container matColumnDef="edit">
+                    <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;">
+                    </th>
+                    <td mat-cell *matCellDef="let element"><button mat-button
+                            (click)="openEditReleasedFunds(element.itemID);"
+                            style="color: blueviolet;">Edit</button>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="releasedDisplayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: releasedDisplayedColumns;"></tr>
+            </table>
+            <mat-paginator #releasedPaginator [pageSize]="3" [pageSizeOptions]="[2, 3, 4, 6, 10]"></mat-paginator>
+        </mat-expansion-panel>
+    </mat-accordion>
+    
+</div>

@@ -1,0 +1,35 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Linked Order
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>      
+</div>
+<div style="text-align: center;">
+    <table style="font-size: 16px;">
+        <thead>
+            <th></th>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let od of orders">
+                <td style="width: 100px;">
+                    <button (click)="openEscrowOrder(od.escrowOrderID)">View</button>
+                </td>
+                <td style="width: 310px;">
+                    {{ od.escrowOrderID }}
+                </td>
+                <td style="width: 310px;">
+                    {{ od.orderDate | date:'MM/dd/yyyy'}}
+                </td>
+                <td style="width: 310px;">
+                    {{ od.orderStatus }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>

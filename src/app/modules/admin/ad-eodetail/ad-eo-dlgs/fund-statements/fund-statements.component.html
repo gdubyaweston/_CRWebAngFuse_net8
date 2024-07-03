@@ -1,0 +1,106 @@
+<div style="padding: 4px">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Funding Statements For {{ escrowOrderID }}
+      <button mat-button matDialogClose matTooltip="Close"
+        style="background-color: transparent; color: black; float: right; font-size: 24px;">
+        &nbsp;X&nbsp;
+      </button>
+    </h2>  
+  </div>
+  <div style="padding: 4px">
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px"
+      (click)="openAddClosingStatement();">
+      <span class="fa fa-plus"></span>&nbsp;Add Closing Statement
+    </button>
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px"
+      (click)="openAddAccountingStatement();">
+      <span class="fa fa-plus"></span>&nbsp;Add Accounting Statement
+    </button>  
+</div>
+<div>
+    <!--
+        TODO: Must ReImplement -->
+    <mat-accordion multi>
+      <mat-expansion-panel style="margin: 2px;">
+        <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+          <mat-panel-title>Closing Statements</mat-panel-title>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="closingDataSource" width="100%" #closingSort="matSort" matSort>
+          <ng-container matColumnDef="statementTitle">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 400px;"
+              mat-sort-header> Statement Title </th>
+            <td mat-cell *matCellDef="let element">{{ element.statementTitle }}</td>
+          </ng-container>
+          <ng-container matColumnDef="participant">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 500px;"
+              mat-sort-header> Participant </th>
+            <td mat-cell *matCellDef="let element">{{ element.participant }}</td>
+          </ng-container>
+          <ng-container matColumnDef="dateCreated">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 175px;"
+              mat-sort-header> Date Created </th>
+            <td mat-cell *matCellDef="let element">{{ element.dateCreated | date:'MM/dd/yyyy hh:mm a' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="dateModified">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 175px;"
+              mat-sort-header> Date Modified </th>
+            <td mat-cell *matCellDef="let element">{{ element.dateModified | date:'MM/dd/yyyy hh:mm a' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="isLocked">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"> Is Locked
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.isLocked }}</td>
+          </ng-container>
+          <ng-container matColumnDef="details">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button (click)="openClosingStatement(element.statementID)"
+                style="color: blueviolet;">Details</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="closingDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: closingDisplayedColumns;"></tr>
+        </table>
+        <mat-paginator #closingPaginator [pageSize]="3" [pageSizeOptions]="[2, 3, 4, 6, 10]"></mat-paginator>
+  
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+          <mat-panel-title>Accounting Statements</mat-panel-title>
+        </mat-expansion-panel-header>
+        <table mat-table [dataSource]="accountingDataSource" width="100%" #accountingSort="matSort" matSort>
+          <ng-container matColumnDef="itemID">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+              mat-sort-header> Item ID </th>
+            <td mat-cell *matCellDef="let element">{{ element.itemID }}</td>
+          </ng-container>
+          <ng-container matColumnDef="dateCreated">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+              mat-sort-header> Date Created </th>
+            <td mat-cell *matCellDef="let element">{{ element.dateCreated | date:'MM/dd/yyyy hh:mm a' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="dateModified">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 150px;"
+              mat-sort-header> Date Modified </th>
+            <td mat-cell *matCellDef="let element">{{ element.dateModified | date:'MM/dd/yyyy hh:mm a' }}</td>
+          </ng-container>
+          <ng-container matColumnDef="isLocked">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"> Is Locked
+            </th>
+            <td mat-cell *matCellDef="let element">{{ element.isLocked }}</td>
+          </ng-container>
+          <ng-container matColumnDef="details">
+            <th mat-header-cell *matHeaderCellDef style="font-weight: bold; font-size: 16px; width: 100px;"></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-button (click)="openAccountingStatement(element.itemID)"
+                style="color: blueviolet;">Details</button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="accountingDisplayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: accountingDisplayedColumns;"></tr>
+        </table>
+        <mat-paginator #accountingPaginator [pageSize]="3" [pageSizeOptions]="[2, 3, 4, 6, 10]"></mat-paginator>
+  
+      </mat-expansion-panel>
+    </mat-accordion>
+    
+</div>
