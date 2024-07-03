@@ -25,15 +25,15 @@ import {
     ServiceResponse,
     StringListItem,
 } from 'app/modules/_modules/serviceclasses';
-import { AircraftService } from 'app/modules/_services/aircraft/acftinfo.service';
-import { GlobalFunctionsService } from 'app/modules/_services/globalfunc/gfinfo.service';
-import { TokenStorageService } from 'app/modules/_services/tokenstorage/tsinfo.service';
+import { AircraftService } from 'app/modules/_services/acftinfo.service';
+import { GlobalFunctionsService } from 'app/modules/_services/gfinfo.service';
+import { TokenStorageService } from 'app/modules/_services/tsinfo.service';
 import { ParticipantSearchResultsComponent } from '../participant-search-results/participant-search-results.component';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
-import { ParticipantInfoService } from 'app/modules/_services/participant/parinfo.service';
-import { EscrowOrderInfoService } from 'app/modules/_services/escrow/eoinfo.service';
-import { MiscService } from 'app/modules/_services/misc/miscinfo.service';
-import { DService } from 'app/modules/_services/dialog/dlgsvc.service';
+import { ParticipantInfoService } from 'app/modules/_services/parinfo.service';
+import { EscrowOrderInfoService } from 'app/modules/_services/eoinfo.service';
+import { MiscService } from 'app/modules/_services/miscinfo.service';
+import { DService } from 'app/modules/_services/dlgsvc.service';
 
 @Component({
     selector: 'add-participant',
