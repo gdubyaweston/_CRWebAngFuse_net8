@@ -1,0 +1,69 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Create Closing Statement
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 22px;">
+    <mat-accordion multi>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Participant Selection (*Required)</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+                <select style="font-size: 16px; width: 250px; border: 1px solid black; background-color: lightgray;" [(ngModel)]="selectedParticipant" >
+                    <option *ngFor="let option of availableParticipants" [value]="option.customerID">{{ option.displayName }}</option>
+                </select>
+            </div>        
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Closing Statement Title</mat-panel-title>
+            </mat-expansion-panel-header>            
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Received Funds</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div><button mat-button style="background-color: teal; color: white;" (click)="openAddReceivedFunds();">Add Received Funds</button></div>
+            <div *ngIf="!hasReceivedFunds">No Received Funds Entered</div>
+            <div *ngIf="hasReceivedFunds">TTTTTTTT</div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Released Funds</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div><button mat-button style="background-color: teal; color: white;" (click)="openAddReleasedFunds();">Add Released Funds</button></div>
+            <div *ngIf="!hasReleasedFunds">No Released Funds Entered</div>
+            <div *ngIf="hasReleasedFunds">TTTTTTTT</div>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Escrow Fee</mat-panel-title>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Report Notes</mat-panel-title>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Previous and Send Closing Statement</mat-panel-title>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header style="font-weight: bold; font-size: 16px;">
+                <mat-panel-title>Delete Closing Statement</mat-panel-title>
+            </mat-expansion-panel-header>
+        </mat-expansion-panel>
+    </mat-accordion>    
+</div>
+
+<!--
+<div style="padding-left: 22px; padding-top: 4px;">    
+    <button mat-button style="background-color: teal; color: white; margin-right: 4px;" matDialogClose>Close</button>
+</div>
+-->

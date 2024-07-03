@@ -1,0 +1,53 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Add Wiring Infomation
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>
+</div>
+<div style="padding-left: 20px;">
+    <table style="font-size: 14px;">
+        <tr>
+            <td colspan="3" class="cellTitle">Participant Name:</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tdStyle"><input type="text" class="cellData cellDataO" id="inpparticipant" [(ngModel)]="participantName"></td>
+        </tr>
+        <tr>                
+            <td class="cellTitle">Bank Name:</td>
+            <td class="cellTitle">ABA/Routing:</td>
+            <td class="cellTitle">Account Name:</td>
+        </tr>
+        <tr>                
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="inpbankName" [(ngModel)]="bankName"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="inpabaRouting" [(ngModel)]="abaRouting"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="inpaccountName" [(ngModel)]="accountName"></td>
+        </tr>
+        <tr>                
+            <td class="cellTitle">Account Number:</td>
+            <td class="cellTitle">Swift Code (International Wires Only):</td>
+            <td class="cellTitle">Reference:</td>
+        </tr>
+        <tr>                
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="inpaccountNumber" [(ngModel)]="accountNumber"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="inpswiftCode" [(ngModel)]="swiftCode"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="inpreference" [(ngModel)]="reference"></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="cellTitle">Beneficiary Address:</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tdStyle"><textarea type="text" class="cellDataBig cellDataO" style="resize: none;" id="inpbeneficiaryAddress" [(ngModel)]="beneficiaryAddress"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="cellTitle">Instructions:</td>
+        </tr>
+        <tr>
+            <td colspan="3" class="tdStyle"><textarea type="text" class="cellDataBig cellDataO" style="resize: none;" id="inpinstructions" [(ngModel)]="instructions"></textarea></td>
+        </tr>
+    </table>
+</div>
+<div style="padding-left: 22px; padding-top: 4px;">    
+    <button mat-button style="background-color: teal; color: white; margin-right: 4px;" (click)="saveWiringInfo();">Save Wiring Information</button>
+</div>

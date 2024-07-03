@@ -1,0 +1,64 @@
+<div style="padding: 4px;">
+    <h2 matDialogTitle style="text-align: center; font-weight: bold; font-size: 18px;">Add Released Funds
+        <button mat-button matDialogClose matTooltip="Close"
+            style="background-color: transparent; color: black; float: right; font-size: 24px;">
+            &nbsp;X&nbsp;
+        </button>
+    </h2>    
+</div>
+<div style="padding-left: 20px;">
+    <table style="font-size: 14px;">
+        <tr>
+            <td class="cellTitle">First Name:</td>
+            <td class="cellTitle">Middle Name:</td>
+            <td class="cellTitle">Last Name:</td>
+        </tr>
+        <tr>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="txtfirstName" [(ngModel)]="firstName"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="txtmiddleName" [(ngModel)]="middleName"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="txtlastName" [(ngModel)]="lastName"></td>
+        </tr>
+        <tr>
+            <td class="cellTitle">Company:</td>
+            <td class="cellTitle">Amount:</td>
+            <td class="cellTitle">Currency Code:</td>
+        </tr>
+        <tr>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="txtcompany" [(ngModel)]="company"></td>
+            <td class="tdStyle"><input type="text" class="cellData cellDataO" id="txtamount" [(ngModel)]="amount"></td>
+            <td class="tdStyle">
+                <select class="cellData cellDataO" id="selcurrencyCode" [(ngModel)]="currencyCode">
+                    <option *ngFor="let code of currencyCodeList" [value]="code.id">{{ code.name }}</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="cellTitle">Funding Date:</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input matInput class="cellData cellDataO" [matDatepicker]="picker" id="dtfundingDate" [(ngModel)]="fundDate">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                    <!--
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker" id="dtfundingDate" [(ngModel)]="fundDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                -->
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3" class="cellTitle">Desciption:</td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <textarea type="text" class="cellDataBig cellDataO" id="txtdescription" [(ngModel)]="description"></textarea>
+            </td>
+        </tr>
+    </table>
+</div>
+<div style="padding-left: 22px; padding-top: 4px;">    
+    <button mat-button style="background-color: teal; color: white; margin-right: 2px;" (click)="saveFunds();">Save Funding</button>    
+</div>
