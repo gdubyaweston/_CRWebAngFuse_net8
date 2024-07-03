@@ -13,7 +13,7 @@ import { CustomerInfo } from "app/modules/_modules/customerclasses";
 import { ADSearchCustomersComponent } from "app/modules/admin/ad-search/ad-search-customers/ad-search-customers.component";
 import { ADSearchCustomerShowComponent } from "app/modules/admin/ad-search/ad-search-customers/ad-search-customer-show/ad-search-customer-show.component";
 import { WireInformationComponent } from "app/modules/admin/ad-eodetail/ad-eo-dlgs/wire-information/wire-information.component";
-import { AddWireInformationComponent } from "app/modules/admin/ad-eodetail/ad-eo-dlgs/add-wire-information/add-wire-information.component";
+import { AddWireInformationComponent } from "../admin/ad-eodetail/ad-eo-dlgs/add-wire-information/add-wire-information.component";
 import { AddReceivedFundsComponent } from "app/modules/admin/ad-eodetail/ad-eo-dlgs/add-received-funds/add-received-funds.component";
 import { AddReleasedFundsComponent } from "app/modules/admin/ad-eodetail/ad-eo-dlgs/add-released-funds/add-released-funds.component";
 import { FundsComponent } from "app/modules/admin/ad-eodetail/ad-eo-dlgs/funds/funds.component";
